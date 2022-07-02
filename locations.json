@@ -1,0 +1,22 @@
+[
+    {
+        "id":"1",
+        "name":"Kitchen",
+        "placeId":"1"
+    },
+    {
+        "id":"2",
+        "name":"Meeting Room",
+        "placeId":"2"
+    },
+    {
+        "id":"3",
+        "name":"Freezer",
+        "placeId":"3"
+    },
+    {
+        "id":"4",
+        "name":"Cash",
+        "placeId":"1"
+    }
+]

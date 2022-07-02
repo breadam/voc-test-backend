@@ -1,0 +1,34 @@
+[
+    {
+        "id": "1",
+        "romId":"2",
+        "name":"device-1",
+        "showDashboard": true,
+        "status": true,
+        "locationId": "1"
+    },
+    {
+        "id": "2",
+        "romId":"1",
+        "name":"device-2",
+        "showDashboard": true,
+        "status": true,
+        "locationId": "2"
+    },
+    {
+        "id": "3",
+        "romId":"1",
+        "name":"device-3",
+        "showDashboard": true,
+        "status": true,
+        "locationId": "3"
+    },
+    {
+        "id": "4",
+        "romId":"2",
+        "name":"device-4",
+        "showDashboard": true,
+        "status": true,
+        "locationId": "4"
+    }
+]

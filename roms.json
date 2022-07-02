@@ -1,0 +1,20 @@
+[
+    {
+        "id":"1",
+        "name":"Rom 1",
+        "url":"Url 1",
+        "active":true
+    },
+    {
+        "id":"2",
+        "name":"Rom 2",
+        "url":"Url 2",
+        "active":true
+    },
+    {
+        "id":"3",
+        "name":"Rom 3",
+        "url":"Url 3",
+        "active":true
+    }
+]
