@@ -5,7 +5,8 @@
         "name":"device-1",
         "showDashboard": true,
         "status": true,
-        "locationId": "1"
+        "locationId": "1",
+        "calibrations":[]
     },
     {
         "id": "2",
@@ -13,22 +14,34 @@
         "name":"device-2",
         "showDashboard": true,
         "status": true,
-        "locationId": "2"
+        "locationId": "2",
+        "calibrations":[]
     },
     {
         "id": "3",
         "romId":"1",
         "name":"device-3",
-        "showDashboard": true,
-        "status": true,
-        "locationId": "3"
+        "showDashboard": false,
+        "status": false,
+        "locationId": "3",
+        "calibrations":[]
     },
     {
         "id": "4",
         "romId":"2",
         "name":"device-4",
-        "showDashboard": true,
+        "showDashboard": false,
         "status": true,
-        "locationId": "4"
+        "locationId": "4",
+        "calibrations":[]
+    },
+    {
+        "id": "5",
+        "romId":"3",
+        "name":"device-5",
+        "showDashboard": false,
+        "status": true,
+        "locationId": "4",
+        "calibrations":[]
     }
 ]

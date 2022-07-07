@@ -1,0 +1,22 @@
+[
+    {
+        "id":"1",
+        "name":"Organization 1",
+        "ownerId":"1"
+    },
+    {
+        "id":"2",
+        "name":"Organization 2",
+        "ownerId":"1"
+    },
+    {
+        "id":"3",
+        "name":"Organization 3",
+        "ownerId":"2"
+    },
+    {
+        "id":"4",
+        "name":"Organization 4",
+        "ownerId":"2"
+    }
+]

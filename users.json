@@ -1,0 +1,14 @@
+[
+    {
+        "id":"1",
+        "name":"Çağatay Yaman",
+        "email":"cagatay@cagatay.com",
+        "permissions":[]
+    },
+    {
+        "id":"2",
+        "name":"Mustafa Kaplan",
+        "email":"mustafa@mustafa.com",
+        "permissions":[]
+    }
+]

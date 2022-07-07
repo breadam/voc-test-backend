@@ -1,0 +1,26 @@
+[
+    {
+        "id":"1",
+        "deviceId":"1",
+        "temperature":10,
+        "humidity":20,
+        "iaq":20,
+        "date":"123123123"
+    },
+    {
+        "id":"2",
+        "deviceId":"2",
+        "temperature":10,
+        "humidity":20,
+        "iaq":20,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":20,
+        "date":"123123123"
+    }
+]
