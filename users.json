@@ -3,12 +3,38 @@
         "id":"1",
         "name":"Çağatay Yaman",
         "email":"cagatay@cagatay.com",
-        "permissions":[]
+        "roles":[
+            {
+                "organizationId":"1",
+                "role":"viewer"
+            },
+            {
+                "organizationId":"2",
+                "role":"editor"
+            },
+            {
+                "organizationId":"3",
+                "role":"admin"
+            }
+        ]
     },
     {
         "id":"2",
         "name":"Mustafa Kaplan",
         "email":"mustafa@mustafa.com",
-        "permissions":[]
+        "roles":[
+            {
+                "organizationId":"1",
+                "role":"editor"
+            },
+            {
+                "organizationId":"2",
+                "role":"admin"
+            },
+            {
+                "organizationId":"3",
+                "role":"viewer"
+            }
+        ]
     }
 ]

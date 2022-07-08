@@ -1,5 +1,19 @@
 {
     "id":"1",
     "name":"Çağatay Yaman",
-    "email":"cagatay@breadam.com"
+    "email":"cagatay@cagatay.com",
+    "roles":[
+        {
+            "organizationId":"1",
+            "role":"viewer"
+        },
+        {
+            "organizationId":"2",
+            "role":"editor"
+        },
+        {
+            "organizationId":"3",
+            "role":"admin"
+        }
+    ]
 }
