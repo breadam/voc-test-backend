@@ -3,7 +3,7 @@
         "id":"1",
         "name":"Çağatay Yaman",
         "email":"cagatay@cagatay.com",
-        "roles":[
+        "roleIds":[
             {
                 "organizationId":"1",
                 "name":"viewer"
@@ -22,7 +22,7 @@
         "id":"2",
         "name":"Mustafa Kaplan",
         "email":"mustafa@mustafa.com",
-        "roles":[
+        "roleIds":[
             {
                 "organizationId":"1",
                 "name":"editor"
@@ -41,7 +41,7 @@
         "id":"3",
         "name":"Hüsnü İşleyen",
         "email":"hüsnü@hüsnü.com",
-        "roles":[
+        "roleIds":[
             {
                 "organizationId":"1",
                 "name":"admin"

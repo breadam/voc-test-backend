@@ -2,18 +2,18 @@
     "id":"1",
     "name":"Çağatay Yaman",
     "email":"cagatay@cagatay.com",
-    "organizationIds":[
+    "roleIds":[
         {
             "organizationId":"1",
-            "role":"viewer"
+            "name":"viewer"
         },
         {
             "organizationId":"2",
-            "role":"editor"
+            "name":"editor"
         },
         {
             "organizationId":"3",
-            "role":"admin"
+            "name":"admin"
         }
     ]
 }
