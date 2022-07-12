@@ -6,15 +6,15 @@
         "roles":[
             {
                 "organizationId":"1",
-                "role":"viewer"
+                "name":"viewer"
             },
             {
                 "organizationId":"2",
-                "role":"editor"
+                "name":"editor"
             },
             {
                 "organizationId":"3",
-                "role":"admin"
+                "name":"admin"
             }
         ]
     },
@@ -25,15 +25,34 @@
         "roles":[
             {
                 "organizationId":"1",
-                "role":"editor"
+                "name":"editor"
             },
             {
                 "organizationId":"2",
-                "role":"admin"
+                "name":"admin"
             },
             {
                 "organizationId":"3",
-                "role":"viewer"
+                "name":"viewer"
+            }
+        ]
+    },
+    {
+        "id":"3",
+        "name":"Hüsnü İşleyen",
+        "email":"hüsnü@hüsnü.com",
+        "roles":[
+            {
+                "organizationId":"1",
+                "name":"admin"
+            },
+            {
+                "organizationId":"2",
+                "name":"admin"
+            },
+            {
+                "organizationId":"3",
+                "name":"admin"
             }
         ]
     }

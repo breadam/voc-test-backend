@@ -6,6 +6,8 @@
         "showDashboard": true,
         "status": true,
         "locationId": "1",
+        "placeId": "1",
+        "tagIds": ["1","2"],
         "calibrations":[]
     },
     {
@@ -15,6 +17,8 @@
         "showDashboard": true,
         "status": true,
         "locationId": "2",
+        "placeId": "1",
+        "tagIds": ["2","3"],
         "calibrations":[]
     },
     {
@@ -24,6 +28,8 @@
         "showDashboard": false,
         "status": false,
         "locationId": "3",
+        "placeId": "1",
+        "tagIds": ["4","5"],
         "calibrations":[]
     },
     {
@@ -33,6 +39,8 @@
         "showDashboard": false,
         "status": true,
         "locationId": "4",
+        "placeId": "1",
+        "tagIds": ["4","5"],
         "calibrations":[]
     },
     {
@@ -42,6 +50,8 @@
         "showDashboard": false,
         "status": true,
         "locationId": "4",
+        "placeId": "1",
+        "tagIds": ["4","5"],
         "calibrations":[]
     }
 ]

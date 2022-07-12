@@ -1,22 +1,22 @@
 [
     {
         "id":"1",
-        "name":"Kitchen",
+        "roomId":"1",
         "placeId":"1"
     },
     {
         "id":"2",
-        "name":"Meeting Room",
+        "roomId":"2",
         "placeId":"2"
     },
     {
         "id":"3",
-        "name":"Freezer",
+        "roomId":"3",
         "placeId":"3"
     },
     {
         "id":"4",
-        "name":"Cash",
+        "roomId":"4",
         "placeId":"1"
     }
 ]
