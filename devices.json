@@ -8,7 +8,11 @@
         "locationId": "1",
         "placeId": "1",
         "tagIds": ["1","2"],
-        "calibrations":[]
+        "calibration":{
+            "humidity":123.4,
+            "temperature":123.2,
+            "date":"123123"
+        }
     },
     {
         "id": "2",
@@ -19,7 +23,11 @@
         "locationId": "2",
         "placeId": "1",
         "tagIds": ["2","3"],
-        "calibrations":[]
+        "calibration":{
+            "humidity":123.4,
+            "temperature":123.2,
+            "date":"123123"
+        }
     },
     {
         "id": "3",
@@ -30,7 +38,11 @@
         "locationId": "3",
         "placeId": "1",
         "tagIds": ["4","5"],
-        "calibrations":[]
+        "calibration":{
+            "humidity":123.4,
+            "temperature":123.2,
+            "date":"123123"
+        }
     },
     {
         "id": "4",
@@ -41,7 +53,11 @@
         "locationId": "4",
         "placeId": "1",
         "tagIds": ["4","5"],
-        "calibrations":[]
+        "calibration":{
+            "humidity":123.4,
+            "temperature":123.2,
+            "date":"123123"
+        }
     },
     {
         "id": "5",
@@ -52,6 +68,10 @@
         "locationId": "4",
         "placeId": "1",
         "tagIds": ["4","5"],
-        "calibrations":[]
+        "calibration":{
+            "humidity":123.4,
+            "temperature":123.2,
+            "date":"123123"
+        }
     }
 ]

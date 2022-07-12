@@ -4,8 +4,6 @@
         "name":"Office",
         "location":[53.12,8.12],
         "address":"XYZ Cad. Turkey, Istanbul",
-        "cityId":"1",
-        "countryId":"2",
         "phone":"+90 216 123 45 67"
     },
     {

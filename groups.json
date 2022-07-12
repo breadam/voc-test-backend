@@ -4,39 +4,47 @@
         "organizationId":"1",
         "name":"Marmara Bölgesi",
         "userIds":["1","2"],
-        "deviceIds":["3","5"],
-        "placeIds":["1","2","3"],
-        "roomIds":["1","2"],
-        "role":"viewer"
+        "allowedDeviceIds":[],
+        "allowedPlaceIds":[],
+        "allowedTagIds":["1"],
+        "blockedDeviceIds":[],
+        "blockedPlaceIds":[],
+        "blockedTagIds":["1"]
     },
     {
         "id":"2",
         "organizationId":"1",
         "name":"Mutfak Sorumluları",
         "userIds":["1","2"],
-        "deviceIds":[],
-        "placeIds":[],
-        "roomIds":["1"],
-        "role":"admin"
+        "allowedDeviceIds":[],
+        "allowedPlaceIds":[],
+        "allowedTagIds":["1"],
+        "blockedDeviceIds":[],
+        "blockedPlaceIds":[],
+        "blockedTagIds":["1"]
     },
     {
         "id":"3",
         "organizationId":"2",
         "name":"Group 3",
         "userIds":["2"],
-        "deviceIds":[],
-        "placeIds":["1"],
-        "roomIds":[],
-        "role":"editor"
+        "allowedDeviceIds":[],
+        "allowedPlaceIds":[],
+        "allowedTagIds":["1"],
+        "blockedDeviceIds":[],
+        "blockedPlaceIds":[],
+        "blockedTagIds":["1"]
     },
     {
         "id":"4",
         "organizationId":"2",
         "name":"Group 4",
         "userIds":["2","1"],
-        "deviceIds":["2","4"],
-        "placeIds":["1","2"],
-        "roomIds":["1","2"],
-        "role":"viewer"
+        "allowedDeviceIds":[],
+        "allowedPlaceIds":[],
+        "allowedTagIds":["1"],
+        "blockedDeviceIds":[],
+        "blockedPlaceIds":[],
+        "blockedTagIds":["1"]
     }
 ]

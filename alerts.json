@@ -4,6 +4,9 @@
         "name":"Temperature Too High",
         "description":"Trigger when temp too high",
         "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
         "triggerIds":[
             {
                 "sensorId":"2",
@@ -17,6 +20,9 @@
         "name":"Humidity Too High",
         "description":"Trigger when temp too high",
         "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
         "triggerIds":[
             {
                 "sensorId":"2",
@@ -40,6 +46,9 @@
         "name":"IAQ too High",
         "description":"Trigger when temp too high",
         "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
         "triggerIds":[
             {
                 "sensorId":"3",
