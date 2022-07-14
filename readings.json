@@ -12,7 +12,7 @@
         "deviceId":"2",
         "temperature":10,
         "humidity":20,
-        "iaq":20,
+        "iaq":60,
         "date":"123123123"
     },
     {
@@ -20,7 +20,55 @@
         "deviceId":"3",
         "temperature":10,
         "humidity":20,
-        "iaq":20,
+        "iaq":80,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":120,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":160,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":202,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":250,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":290,
+        "date":"123123123"
+    },
+    {
+        "id":"3",
+        "deviceId":"3",
+        "temperature":10,
+        "humidity":20,
+        "iaq":310,
         "date":"123123123"
     }
 ]
