@@ -1,0 +1,60 @@
+[
+    {
+        "id":"1",
+        "name":"Temperature Too High",
+        "description":"Trigger when temp too high",
+        "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
+        "triggerIds":[
+            {
+                "sensorId":"2",
+                "comparatorId":"2",
+                "value":12
+            }
+        ]
+    },
+    {
+        "id":"2",
+        "name":"Humidity Too High",
+        "description":"Trigger when temp too high",
+        "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
+        "triggerIds":[
+            {
+                "sensorId":"2",
+                "comparatorId":"2",
+                "value":12
+            },
+            {
+                "sensorId":"1",
+                "comparatorId":"3",
+                "value":23.4
+            },
+            {
+                "sensorId":"3",
+                "comparatorId":"4",
+                "value":67.6
+            }
+        ]
+    },
+    {
+        "id":"3",
+        "name":"IAQ too High",
+        "description":"Trigger when temp too high",
+        "targetIds":["1","2"],
+        "deviceIds":["1","2"],
+        "tagIds":["1","2"],
+        "placeIds":["1","2"],
+        "triggerIds":[
+            {
+                "sensorId":"3",
+                "comparatorId":"2",
+                "value":12
+            }
+        ]
+    }
+]

@@ -11,18 +11,7 @@
     },
     {
         "id":"3",
-        "userId":"4",
-        "role":"editor"
-    },
-    {
-        "id":"4",
         "userId":"3",
-        "role":"viewer"
-    },
-    {
-        "id":"5",
-        "userId":"5",
-        "role":"admin"
+        "role":"editor"
     }
-    
 ]
