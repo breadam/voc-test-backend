@@ -43,7 +43,7 @@ export default class Store{
 
     static getMany(resource,ids){
         const json = this.loadResource(resource);
-        return ids.map((id) => json.find((item) => item.id === id));
+        return ids.split(',').map((id) => json.find((item) => item.id === id));
     }
 
     static find(resource,search){
