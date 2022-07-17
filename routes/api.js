@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import json from 'koa-json';
 
-import Store from './store.js';
+import Store from '../store.js';
 
 const router = new Router({
 	prefix: '/api'
