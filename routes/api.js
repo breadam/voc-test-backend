@@ -1,67 +1,44 @@
 import Router from 'koa-router';
-import json from 'koa-json';
 
-import Store from '../store.js';
+import Store from '../Store.js';
+
+import auth from '../middlewares/auth.js';
+
+import resources from '../resources/index.js';
 
 const router = new Router({
 	prefix: '/api'
 });
 
-router.use(json());
+router.use(auth);
 
-router.get('/',(ctx,next) => {
-	const list = Store.getResourceList();
+router.get('/:resource',(ctx, next) => {
 
-	const resources = list.map((resource) => {
-		return `
-			<li>
-				<h3>${resource}</h3>
-				<table>	
-					<tr><td><a href="/api/${resource}">Get All</a></td><td>/api/${resource}/</td></tr>
-					<tr><td><a href="/api/${resource}?pageId=1&pageSize=2">Get Page</a></td><td>/api/${resource}?pageId=&ltpage_id&gt&&ltpage_size&gt</td></tr>
-					<tr><td><a href="/api/${resource}/1">Get One</a></td><td>/api/${resource}/&ltitem_id&gt</td></tr>
-					<tr><td><a href="/api/${resource}?ids=1,2">Get Many</a></td><td>/api/${resource}?ids=&ltid_list&gt</td></tr>
-				<table>
-			</li>
-		`
-	}).join('');
-
-	const body = `
-		<h2>API</h2>
-		<ul>		
-			${resources} 
-		</ul>`;
-	ctx.body = body;
-	next();
-});
-
-router.get('/:resource', (ctx, next) => {
 	const resource = ctx.params.resource;
 	const ids = ctx.query.ids;
 	const search = ctx.query.search;
 	const pageId = Number.parseInt(ctx.query.pageId);
 	const pageSize = Number.parseInt(ctx.query.pageSize);
-	const fields = ctx.query.fields;
 
 	if(ids){
+		resources[resource]?.beforeGetMany(ctx,ids);
 		const items = Store.getMany(resource,ids);
-		ctx.body = items;
-		return next();
-	}
-
-	if(pageId && pageSize){
-		const items = Store.getPage(resource,pageId,pageSize);
+		resources[resource]?.afterGetMany(ctx,items);
 		ctx.body = items;
 		return next();
 	}
 
 	if(search){
-		const items = Store.find(resource,search);
+		const params = Store.parseSearch(search);
+		resources[resource]?.beforeFindMany(ctx,params);
+		const items = Store.findMany(resource,params,pageId,pageSize);
+		resources[resource]?.afterFindMany(ctx,items);
 		ctx.body = items;
 		return next();
 	}
-
+	resources[resource]?.beforeGetAll(ctx);
 	const items = Store.getAll(resource,pageId,pageSize);
+	resources[resource]?.afterGetAll(ctx,items);
 	ctx.body = items;
 	return next();
 });
@@ -69,9 +46,12 @@ router.get('/:resource', (ctx, next) => {
 router.get('/:resource/:id', (ctx, next) => {
 	const resource = ctx.params.resource;
 	const id = ctx.params.id;
-	const fields = ctx.params.id;
+
+	resources[resource]?.beforeGetOne(ctx);
 
 	const item = Store.getOne(resource,id);
+
+	resources[resource]?.afterGetOne(ctx);
 
 	ctx.body = item;
 	next();
@@ -79,9 +59,28 @@ router.get('/:resource/:id', (ctx, next) => {
 
 router.post('/:resource', (ctx, next) => {
 	const resource = ctx.params.resource;
-	const data = ctx.body;
+	const data = ctx.request.body;
+	const organizationType = ctx.organizationType;
 
+	resources[resource]?.beforeCreate(ctx,data);
+
+	if(organizationType === "user"){
+		data.ownerId = ctx.user.id;
+		data.ownerType = 'user';
+	}else if(organizationType === 'organization'){
+		data.ownerId = ctx.organizationId;
+		data.ownerType = 'organization';
+	}
+	
+	data.createdById = ctx.user.id;
+	data.createdAt = new Date();
+	data.updatedById = ctx.user.id;
+	data.updatedAt = new Date();
+	
 	const item = Store.createOne(resource,data);
+
+	resources[resource]?.afterCreate(ctx,item);
+	
 	ctx.body = item;
 	next();
 });
@@ -89,9 +88,18 @@ router.post('/:resource', (ctx, next) => {
 router.put('/:resource/:id', (ctx, next) => {
 	const resource = ctx.params.resource;
 	const id = ctx.params.id;
-	const data = ctx.body;
+	const data = ctx.request.body;
+	
+	resources[resource]?.beforeUpdate(ctx,data);
+
+	data.updatedById = ctx.user.id;
+	data.updatedAt = new Date();
 
 	Store.updateOne(resource,id,data);
+
+	resources[resource]?.afterUpdate(ctx,data);
+	
+	ctx.body = data;
 
 	next();
 });
@@ -99,11 +107,12 @@ router.put('/:resource/:id', (ctx, next) => {
 router.delete('/:resource/:id', (ctx, next) => {
 	const resource = ctx.params.resource;
 	const id = ctx.params.id;
-	const data = ctx.body;
+	
+	resources[resource]?.beforeDelete(ctx);
 
-	const item = Store.deleteOne(resource,id,data);
+	const item = Store.deleteOne(resource,id);
 
-	ctx.body = item;
+	resources[resource]?.afterDelete(ctx);
 	next();
 });
 
