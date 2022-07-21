@@ -1,5 +1,5 @@
 import Resource from '../Resource.js';
-import Store from '../Store.js';
+import Store from '../store.js';
 
 export default Resource({
 

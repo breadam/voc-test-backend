@@ -1,6 +1,6 @@
 import {connect} from 'mqtt';
 
-import Store from './Store.js';
+import Store from './store.js';
 
 export default ({url,username,password}) => {
 

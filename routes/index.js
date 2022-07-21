@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import jwt from 'jsonwebtoken';
 
-import Store from '../Store.js';
+import Store from '../store.js';
 
 import {JWT_PASSWORD} from '../config.js';
 

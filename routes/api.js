@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 
-import Store from '../Store.js';
+import Store from '../store.js';
 
 import auth from '../middlewares/auth.js';
 

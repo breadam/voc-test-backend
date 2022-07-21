@@ -1,4 +1,4 @@
-import Store from '../Store.js';
+import Store from '../store.js';
 import Resource from '../Resource.js';
 
 export default Resource({
