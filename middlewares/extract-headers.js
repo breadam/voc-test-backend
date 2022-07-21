@@ -5,7 +5,7 @@ export default (ctx,next) => {
         return next();
     }
 
-    ctx.token = ctx.headers.authorization.split(' ')[1];
+    ctx.token = ctx.headers.authorization?.split(' ')[1];
     ctx.organizationId = ctx.headers['x-voc-organization-id'];
     next();
 }
