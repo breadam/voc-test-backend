@@ -1,6 +1,7 @@
 import {readFileSync,writeFileSync,readdirSync} from 'fs';
 import {join} from 'path';
 
+
 export default class Store{
 
     static DIR = './db';
