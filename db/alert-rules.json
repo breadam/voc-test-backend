@@ -1,1 +1,1 @@
-[{"id":"0","name":"Temp too High","description":"","triggerIds":[{"sensorId":"1","comparatorId":"2","value":"70"},{"sensorId":"1","comparatorId":"3","value":"10"}],"deviceIds":["0"],"placeIds":["0"],"tagIds":["0"],"organizationId":"1","createdById":"1","createdAt":"2022-07-20T19:41:49.143Z","updatedById":"1","updatedAt":"2022-07-21T13:12:56.369Z"}]
+[]
