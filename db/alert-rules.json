@@ -1,1 +1,1 @@
-[]
+[{"id":"0","name":"Temperature Too High","description":"Triggers when temperature is above 200C","triggerIds":[{"sensorId":"1","comparatorId":"2","value":"200"},{"sensorId":"3","comparatorId":"3","value":"50"}],"deviceIds":["1"],"placeIds":["3"],"tagIds":["3","4"],"organizationId":"2","createdById":"0","createdAt":"2022-07-22T15:44:26.874Z","updatedById":"0","updatedAt":"2022-07-22T15:45:15.006Z"}]
