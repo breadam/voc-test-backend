@@ -17,6 +17,7 @@ router.get('/:resource',(ctx, next) => {
 	const resource = ctx.params.resource;
 	const ids = ctx.query.ids;
 	const search = ctx.query.search;
+	const label = ctx.query.label;
 	const pageId = Number.parseInt(ctx.query.pageId);
 	const pageSize = Number.parseInt(ctx.query.pageSize);
 
@@ -36,6 +37,14 @@ router.get('/:resource',(ctx, next) => {
 		ctx.body = items;
 		return next();
 	}
+
+	if(label){
+		const items = Store.getAll(resource);
+		const filtered = resources[resource]?.labels[label](ctx,items);
+		ctx.body = filtered;
+		return next();
+	}
+
 	resources[resource]?.beforeGetAll(ctx);
 	const items = Store.getAll(resource,pageId,pageSize);
 	resources[resource]?.afterGetAll(ctx,items);
@@ -104,15 +113,29 @@ router.put('/:resource/:id', (ctx, next) => {
 	next();
 });
 
+router.delete('/:resource', (ctx, next) => {
+
+	const resource = ctx.params.resource;
+	const ids = ctx.query.ids;
+	
+	if(ids){
+		Store.deleteMany(resource,ids);
+	}
+	ctx.body = '';
+	next();
+});
+
 router.delete('/:resource/:id', (ctx, next) => {
 	const resource = ctx.params.resource;
 	const id = ctx.params.id;
 	
 	resources[resource]?.beforeDelete(ctx);
 
-	const item = Store.deleteOne(resource,id);
+	Store.deleteOne(resource,id);
 
 	resources[resource]?.afterDelete(ctx);
+	
+	ctx.body = '';
 	next();
 });
 

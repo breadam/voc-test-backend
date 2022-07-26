@@ -113,6 +113,22 @@ export default class Store{
         return item;
     }
 
+    static deleteMany(resource,ids){
+        const json = this.loadResource(resource);
+        
+        ids.split(',').forEach((id) => {
+            const index = json.findIndex((item) => item.id === id);
+                
+            if(index === -1){
+                return;
+            }
+    
+            json.splice(index,1);
+        })
+        
+        this.saveResource(resource,json);
+    }
+
     static parseSearch(query){
         const params = {};
         query.split(',').forEach((q) => {

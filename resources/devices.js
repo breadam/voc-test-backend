@@ -44,6 +44,4 @@ export default Resource({
             Store.saveOne('readings',reading);
         });
     }
-
-
-})
+});

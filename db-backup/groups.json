@@ -1,0 +1,1 @@
+[{"id":"0","name":"Mutfak","userIds":["2"],"allowedDeviceIds":["1"],"blockedDeviceIds":[],"allowedPlaceIds":["2","3"],"blockedPlaceIds":[],"allowedTagIds":["3","4"],"blockedTagIds":["5"],"organizationId":"2","createdById":"0","createdAt":"2022-07-22T15:41:23.209Z","updatedById":"0","updatedAt":"2022-07-22T15:43:30.918Z"}]
