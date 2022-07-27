@@ -97,7 +97,7 @@ export default class Store{
             return this.createOne(resource,data);
         }
 
-        this.updateOne(resource,data.id,data);
+        return this.updateOne(resource,data.id,data);
     }
 
     static deleteOne(resource,id){

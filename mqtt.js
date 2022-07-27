@@ -17,8 +17,6 @@ export default ({url,username,password}) => {
     client.on('message', function (topic, message) {
         if(topic === 'Send'){
             const fields = message.toString().split('#');
-            
-            
             const code = fields[0];
             /*
             const date = fields[1];
@@ -45,7 +43,24 @@ export default ({url,username,password}) => {
             });
 
         }else if(topic === 'Status'){
+            const fields = message.toString().split('#');
 
+            const code = fields[0];
+         // const localIp = fields[1];
+            const romName = fields[2];
+
+            let rom = Store.findOne('roms',{name:romName});
+
+            if(!rom){
+                rom = Store.createOne('roms',{name:romName});
+            }
+
+            let device = Store.findOne('devices',{code});
+
+            if(device){
+                device.romId = rom.id;
+                Store.updateOne('devices',device.id,device);
+            }
         }
     });
 
