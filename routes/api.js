@@ -39,9 +39,16 @@ router.get('/:resource',(ctx, next) => {
 	}
 
 	if(label){
+		console.log(label);
 		const items = Store.getAll(resource);
-		const filtered = resources[resource]?.labels[label](ctx,items);
-		ctx.body = filtered;
+		const filter = resources[resource]?.labels[label];
+
+		if(filter){
+			const filtered = (ctx,items);
+			ctx.body = filtered;
+		}else{
+			ctx.body = '';
+		}
 		return next();
 	}
 

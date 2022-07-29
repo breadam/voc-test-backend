@@ -8,6 +8,7 @@ import devices from './devices.js'
 import alerts from './alerts.js'
 import readings from './readings.js'
 import users from './users.js'
+import calibrations from './calibrations.js'
 
 export default {
     organizations,
@@ -19,5 +20,6 @@ export default {
     tags,
     devices,
     readings,
-    users
+    users,
+    calibrations
 }
