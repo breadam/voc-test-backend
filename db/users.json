@@ -1,1 +1,1 @@
-[{"name":"Çağatay Yaman","email":"x@y.com","password":"1234","accountType":"corporate","id":"0"},{"name":"Fuat Yaman","email":"a@b.com","password":"1234","accountType":"corporate","id":"1"}]
+[{"name":"Çağatay Yaman","email":"x@y.com","password":"1234","accountType":"corporate","id":"0"},{"name":"Fuat Yaman","email":"a@b.com","password":"1234","accountType":"corporate","id":"1"},{"email":"a@b.com","organizationId":"2","createdById":"0","createdAt":"2022-07-30T00:42:48.693Z","updatedById":"0","updatedAt":"2022-07-30T00:42:48.693Z","id":"2"}]

@@ -9,6 +9,7 @@ import alerts from './alerts.js'
 import readings from './readings.js'
 import users from './users.js'
 import calibrations from './calibrations.js'
+import invitations from './invitations.js'
 
 export default {
     organizations,
@@ -21,5 +22,6 @@ export default {
     devices,
     readings,
     users,
-    calibrations
+    calibrations,
+    invitations
 }

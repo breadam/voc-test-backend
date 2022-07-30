@@ -39,7 +39,6 @@ router.get('/:resource',(ctx, next) => {
 	}
 
 	if(label){
-		console.log(label);
 		const items = Store.getAll(resource);
 		const filter = resources[resource]?.labels[label];
 
