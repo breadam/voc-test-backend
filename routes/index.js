@@ -69,18 +69,16 @@ router.post('/signup',(ctx,next) => {
 	const name = body.name;
 	const email = body.email;
 	const password = body.password;
-    const accountType = body.accountType;
-
+    
 	const user = Store.createOne('users',{
 		name,
 		email,
-		password,
-		accountType
+		password
 	});
 
 	const organization = Store.createOne('organizations',{
 		type:'user',
-		userId:user.id
+		userId:user.id,
 	});
 
 	Store.createOne('roles',{
