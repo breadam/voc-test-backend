@@ -133,7 +133,14 @@ export default class Store{
         const params = {};
         query.split(',').forEach((q) => {
 			const s = q.split(':');
-			params[s[0]] = s[1];
+            if(s[1] === 'true'){
+                params[s[0]] = true;
+            }else if(s[1] === 'false'){
+                params[s[0]] = false;
+            }else{
+                params[s[0]] = s[1];
+            }
+			
 		});
         return params;
     }

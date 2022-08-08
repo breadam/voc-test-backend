@@ -1,2 +1,9 @@
 [
+    {
+        "id":"0",
+        "alertRuleId":"1",
+        "deviceId":"0",
+        "seenById":"1",
+        "respondedById":"1"
+    }
 ]

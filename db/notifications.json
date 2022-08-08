@@ -1,11 +1,34 @@
 [
     {
         "id":"1",
-        "message":"asdasd",
-        "detail":"asdasd ad ",
-        "type":"asdas asd asd asd",
-        "organizationId":"1",
-        "userId":"1",
-        "isShowed":false
+        "type":"alert",
+        "organizationId":"2",
+        "userId":"0",
+        "alertId":"0",
+        "isSeen":false
+    },
+    {
+        "id":"2",
+        "type":"invitation-received",
+        "organizationId":"2",
+        "userId":"0",
+        "fromUserId":"1",
+        "isSeen":false
+    },
+    {
+        "id":"3",
+        "type":"invitation-accepted",
+        "organizationId":"2",
+        "userId":"0",
+        "fromUserId":"1",
+        "isSeen":false
+    },
+    {
+        "id":"4",
+        "type":"invitation-declined",
+        "organizationId":"2",
+        "userId":"0",
+        "fromUserId":"1",
+        "isSeen":false
     }
 ]
