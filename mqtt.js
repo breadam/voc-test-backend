@@ -1,4 +1,5 @@
 import {connect} from 'mqtt';
+import { checkTriggers, isTargetDevice } from './alert-engine.js';
 
 import Store from './store.js';
 
@@ -31,16 +32,59 @@ export default ({url,username,password}) => {
             */
 
             const device = Store.findOne('devices',{code});
+            const organizationId = device?.organizationId;
 
-            Store.createOne('readings',{
+            const reading = Store.createOne('readings',{
                 deviceId:device?.id,
-                organizationId:device?.organizationId,
+                organizationId:organizationId,
                 code:code,
                 createdAt:fields[1],
                 temperature:fields[2],
                 humidity:fields[4],
                 iaq:fields[8]
             });
+
+            if(device){
+
+                const rules = Store.findMany('alert-rules',{organizationId});
+
+                rules.forEach(rule => {
+                    if(!isTargetDevice(rule,device)){
+                        return;
+                    }
+
+                    const alerts = checkTriggers(rule.triggerIds,reading);
+                    const roles = Store.findMany('roles',{organizationId});
+
+                    alerts.forEach(item => {
+
+                        const alert = Store.createOne('alerts',{
+                            organizationId,
+                            alertRuleId:rule.id,
+                            deviceId:device.id,
+                            triggerIds:item,
+                            createdAt:new Date()
+                        });
+
+                        roles.forEach(role => {
+
+                            if(role.name === 'admin'){
+
+                                Store.createOne('notifications',{
+                                    type:'alert',
+                                    userId:role.userId,
+                                    deviceId:device.id,
+                                    organizationId,
+                                    alertId:alert.id,
+                                    createdAt:new Date()
+                                });
+                            }
+                        });
+
+                    });
+                });
+
+            }
 
         }else if(topic === 'Status'){
             const fields = message.toString().split('#');

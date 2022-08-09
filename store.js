@@ -89,7 +89,7 @@ export default class Store{
 
         this.saveResource(resource,json);
 
-        return data;
+        return item;
     }
 
     static saveOne(resource,data){
@@ -104,12 +104,14 @@ export default class Store{
         const json = this.loadResource(resource);
         const index = json.findIndex((item) => item.id === id);
 
-        if(index !== -1){
+        if(index === -1){
             return;
         }
 
         const item = json.splice(index,1);
+
         this.saveResource(resource,json);
+        
         return item;
     }
 

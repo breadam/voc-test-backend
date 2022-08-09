@@ -1,9 +1,1 @@
-[
-    {
-        "id":"0",
-        "alertRuleId":"1",
-        "deviceId":"0",
-        "seenById":"1",
-        "respondedById":"1"
-    }
-]
+[{"organizationId":"2","alertRuleId":"1","deviceId":"1","triggerIds":{"sensorId":"1","comparatorId":"1","value":"10"},"id":"0"},{"organizationId":"2","alertRuleId":"1","deviceId":"1","triggerIds":{"sensorId":"1","comparatorId":"1","value":"10"},"createdAt":1660074946732,"id":"1"},{"organizationId":"2","alertRuleId":"1","deviceId":"1","triggerIds":{"sensorId":"1","comparatorId":"1","value":"10"},"createdAt":"2022-08-09T19:59:51.261Z","id":"2"}]

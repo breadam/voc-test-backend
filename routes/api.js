@@ -110,11 +110,13 @@ router.put('/:resource/:id', (ctx, next) => {
 	data.updatedById = ctx.user.id;
 	data.updatedAt = new Date();
 
-	Store.updateOne(resource,id,data);
+	const item = Store.updateOne(resource,id,data);
 
-	resources[resource]?.afterUpdate(ctx,data);
+	if(item){
+		resources[resource]?.afterUpdate(ctx,item);
+	}
 	
-	ctx.body = data;
+	ctx.body = item;
 
 	next();
 });
