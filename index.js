@@ -9,6 +9,7 @@ import api from './routes/api.js'
 import extractHeaders from './middlewares/extract-headers.js';
 
 import mqtt from './mqtt.js';
+import checkStatus from './check-status.js';
 
 const app = new Koa();
 
@@ -26,3 +27,5 @@ mqtt({
     username: 'Sttvoc',
     password: 'voc956'
 });
+
+checkStatus();

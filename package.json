@@ -21,6 +21,7 @@
   "homepage": "https://github.com/breadam/voc-test-backend#readme",
   "dependencies": {
     "@koa/cors": "^3.3.0",
+    "dayjs": "^1.11.4",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",

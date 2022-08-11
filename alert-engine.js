@@ -1,20 +1,3 @@
-import Store from './store.js';
-
-const INTERVAL = 2000;
-
-function getLatestReadings(devices){
-    return Store.getAll('readings')
-        .filter(item => devices.find(device => device.id === item.deviceId))
-        .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .reduce((r, o) => {
-            const index = r.findIndex(({ deviceId }) => deviceId === o.deviceId);
-            if(index === -1){
-                r.push(o);
-            }
-            return r;
-        },[]);
-}
-
 function compareTrigger(comparatorId,reading,value){
     switch(comparatorId){
         case '1':

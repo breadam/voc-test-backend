@@ -13,6 +13,7 @@ const proto = {
     afterUpdate(){},
     beforeDelete(){},
     afterDelete(){},
+    custom:{}
 }
 
 export default (props) => {

@@ -30,6 +30,13 @@ export default Resource({
             const user = Store.findOne('users',{email:email});
             
             if(user){
+
+                Store.createOne('roles',{
+                    organizationId:organizationId,
+                    userId:user.id,
+                    name:'viewer'
+                });
+
                 Store.createOne('notifications',{
                     type:"invitation-accepted",
                     invitationId:id,
