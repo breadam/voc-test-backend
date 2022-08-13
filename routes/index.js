@@ -123,10 +123,7 @@ router.get('/deviceRom/update',(ctx,next) => {
 
 	const rom = Store.getOne('roms',device.romId);
 
-	const currentVersion = getVersionCode(romVersion);
-	const deviceVersion = getVersionCode(rom.name);
-
-	if(currentVersion.name === deviceVersion.name && deviceVersion.version > currentVersion.version){
+	if(rom.url){
 		ctx.body = rom.url;
 	}else{
 		ctx.body = 'none';
@@ -137,6 +134,8 @@ router.get('/deviceRom/update',(ctx,next) => {
 
 router.get('/calibration/calibration',(ctx,next) => {
 
+	// deactivate calibration after query 
+
 	const {uuid,temp,hum,iaq} = ctx.query;
 	
 	const device = Store.findOne('devices',{code:uuid});
@@ -146,16 +145,26 @@ router.get('/calibration/calibration',(ctx,next) => {
 		return next();
 	}
 
-	const calibrations = Store.findMany('calibrations',{deviceId:device.id}).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-	if(calibrations.length === 0){
+	if(!device.calibrationId){
 		ctx.body = 'none';
 		return next();
 	}
 
-	const cTemperature = calibrations[0].temperature;
-	const cHumidity = calibrations[0].humidity;
-	const cIaq = calibrations[0].iaq;
+	const calibration = Store.getOne('calibration',device.calibrationId);
+
+	if(!calibration){
+		ctx.body = 'none';
+		return next();
+	}
+
+	Store.updateOne('devices',device.id,{
+		calibrationId:null
+	});
+
+
+	const cTemperature = calibration.temperature;
+	const cHumidity = calibration.humidity;
+	const cIaq = calibration.iaq;
 
 	let ret = '';
 	

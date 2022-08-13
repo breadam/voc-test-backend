@@ -99,10 +99,10 @@ export default ({url,username,password}) => {
                 rom = Store.createOne('roms',{name:romName});
             }
 
-            let device = Store.findOne('devices',{code});
+            const device = Store.findOne('devices',{code});
 
             if(device){
-                device.romId = rom.id;
+                device.activeRomId = rom.id;
                 Store.updateOne('devices',device.id,device);
             }
         }
