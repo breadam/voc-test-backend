@@ -116,7 +116,7 @@ router.get('/deviceRom/update',(ctx,next) => {
 
 	const device = Store.findOne('devices',{code:uuid});
 
-	if(device){
+	if(!device){
 		ctx.body = "none";
 		return next();
 	}
