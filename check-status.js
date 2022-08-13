@@ -31,10 +31,8 @@ function loop(){
         }
 
         if(device.status !== status){
-            
-            Store.updateOne('devices',device.id,{
-                status
-            });
+            device.status = status;
+            Store.updateOne('devices',device.id,device);
         }
     });
 

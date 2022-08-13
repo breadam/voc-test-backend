@@ -110,4 +110,90 @@ router.get('/me',auth,(ctx,next) => {
 	}
 });
 
+router.get('/deviceRom/update',(ctx,next) => {
+
+	const {uuid,romVersion} = ctx.query;
+
+	const device = Store.findOne('devices',{code:uuid});
+
+	if(device){
+		ctx.body = "none";
+		return next();
+	}
+
+	const rom = Store.getOne('roms',device.romId);
+
+	const currentVersion = getVersionCode(romVersion);
+	const deviceVersion = getVersionCode(rom.name);
+
+	if(currentVersion.name === deviceVersion.name && deviceVersion.version > currentVersion.version){
+		ctx.body = rom.url;
+	}else{
+		ctx.body = 'none';
+	}
+
+	next();
+});
+
+router.get('/calibration/calibration',(ctx,next) => {
+
+	const {uuid,temp,hum,iaq} = ctx.query;
+	
+	const device = Store.findOne('devices',{code:uuid});
+	
+	if(!device){
+		ctx.body = 'none';
+		return next();
+	}
+
+	const calibrations = Store.findMany('calibrations',{deviceId:device.id}).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+	if(calibrations.length === 0){
+		ctx.body = 'none';
+		return next();
+	}
+
+	const cTemperature = calibrations[0].temperature;
+	const cHumidity = calibrations[0].humidity;
+	const cIaq = calibrations[0].iaq;
+
+	let ret = '';
+	
+	if(temp && cTemperature !== temp){
+		const deltaTemperature = cTemperature - temp;
+		ret += deltaTemperature;
+	}
+
+	if(hum && cHumidity !== hum){
+		const deltaHumidity = cHumidity - hum;
+		ret += '#' + deltaHumidity;
+	}
+
+	if(iaq && cIaq !== iaq){
+		const deltaIaq = cIaq - iaq;
+		ret += '#' + deltaIaq;
+	}
+
+	if(!ret){
+		ctx.body = 'none';
+	}else{
+		ctx.body = ret;
+	}
+	next();
+})
+
+function getVersionCode(romVersion){
+	const romVersionArray = romVersion.split('_');
+	const romVersionNumber = romVersionArray.pop();
+	const name = romVersionArray.join('_');
+
+	const code = romVersionNumber.substring(1,romVersionNumber.length);
+	
+	return {
+		name: name + '_' + romVersionNumber.charAt(0),
+		version:code
+	};
+}
+
+
 export default router;
