@@ -28,6 +28,12 @@ function loop(){
 
         if(isOffline(reading.createdAt)){
             status = false;
+            Store.createOne('readings',{
+                deviceId:device.id,
+                organizationId:device.organizationId,
+                code:device.code,
+                createdAt:new Date(),
+            });
         }
 
         if(device.status !== status){
