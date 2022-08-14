@@ -38,7 +38,8 @@ export default ({url,username,password}) => {
                 deviceId:device?.id,
                 organizationId:organizationId,
                 code:code,
-                createdAt:fields[1],
+                readAt:fields[1],
+                createdAt:new Date(),
                 temperature:fields[2],
                 humidity:fields[4],
                 iaq:fields[8]

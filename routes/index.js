@@ -123,7 +123,9 @@ router.get('/deviceRom/update',(ctx,next) => {
 
 	const rom = Store.getOne('roms',device.romId);
 
-	if(rom.url){
+	if(romVersion === rom.name){
+		ctx.body = 'none';
+	}else if(rom.url){
 		ctx.body = rom.url;
 	}else{
 		ctx.body = 'none';
