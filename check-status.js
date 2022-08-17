@@ -1,50 +1,59 @@
 import dayjs from "dayjs";
 
-import Store from "./store.js";
-
-const INTERVAL = 5000;
+const INTERVAL = 10000;
 
 function isOffline(readingDate){
     return dayjs().subtract(5,'minutes').isAfter(dayjs(readingDate));
 }
 
-function loop(){
+export default function (Store){
 
-    const readings = Store.loadResource('readings');
+    async function loop(){
 
-    readings.forEach((reading) => {
+        const readings = await Store.getAll('readings');
+        
+        let deviceIds = {};
 
-        if(!reading.deviceId){
-            return;
-        }
-
-        const device = Store.getOne('devices',reading.deviceId);
+        const sortedReadings = await readings.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+        
+        for(const reading of sortedReadings){
+            if(!reading.deviceId || deviceIds[reading.deviceId]){
+                return;
+            }
     
-        if(!device){
-            return;
+            const device = await Store.getOne('devices',reading.deviceId);
+        
+            if(!device){
+                deviceIds[reading.deviceId] = true;
+                return;
+            }
+    
+            let status = true;
+    
+            if(isOffline(reading.createdAt)){
+                status = false;
+                await Store.createOne('readings',{
+                    deviceId:device.id,
+                    organizationId:device.organizationId,
+                    code:device.code,
+                    createdAt:new Date(),
+                });
+            }
+
+            if(device.status !== status){
+                device.status = status;
+                await Store.updateOne('devices',device.id,device);
+            }
+
+            deviceIds[reading.deviceId] = true;
         }
+        
+        deviceIds = null;
 
-        let status = true;
+        setTimeout(loop,INTERVAL);
+    }
 
-        if(isOffline(reading.createdAt)){
-            status = false;
-            Store.createOne('readings',{
-                deviceId:device.id,
-                organizationId:device.organizationId,
-                code:device.code,
-                createdAt:new Date(),
-            });
-        }
-
-        if(device.status !== status){
-            device.status = status;
-            Store.updateOne('devices',device.id,device);
-        }
-    });
-
-    setTimeout(loop,INTERVAL);
-}
-
-export default function run(){
-    setTimeout(loop,INTERVAL);
+    return function(){
+        setTimeout(loop,0)
+    };
 }

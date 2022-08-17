@@ -10,22 +10,39 @@ import extractHeaders from './middlewares/extract-headers.js';
 
 import mqtt from './mqtt.js';
 import checkStatus from './check-status.js';
+import MongoDB from './mongodb.js';
 
-const app = new Koa();
+(async() => {
 
-app.use(cors());
-app.use(koaBody());
-app.use(json());
-app.use(extractHeaders);
-app.use(index.routes());
-app.use(api.routes());
+    await MongoDB.setup();
 
-app.listen(process.env.PORT || 3000);
+    const app = new Koa();
 
-mqtt({
-    url: 'mqtt://176.236.189.247:1881',
-    username: 'Sttvoc',
-    password: 'voc956'
-});
+    app.use(function(ctx,next){
+        ctx.store = MongoDB;
+        return next();
+    });
 
-checkStatus();
+    app.use(cors());
+    app.use(koaBody());
+    app.use(json());
+    app.use(extractHeaders);
+    app.use(index.routes());
+    app.use(api.routes());
+
+    app.listen(process.env.PORT || 3000);
+
+    console.log('Start MQTT');
+
+    mqtt({
+        url: 'mqtt://176.236.189.247:1881',
+        username: 'Sttvoc',
+        password: 'voc956',
+    },MongoDB);
+    
+    console.log('Start Status Check');
+
+    const runStatusCheck = checkStatus(MongoDB);
+
+    runStatusCheck();
+})();

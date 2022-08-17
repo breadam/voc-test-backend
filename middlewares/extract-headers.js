@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export default (ctx,next) => {
     const authorization = ctx.headers.authorization;
     
@@ -6,6 +8,6 @@ export default (ctx,next) => {
     }
 
     ctx.token = ctx.headers.authorization?.split(' ')[1];
-    ctx.organizationId = ctx.headers['x-voc-organization-id'];
-    next();
+    ctx.organizationId = ObjectId(ctx.headers['x-organizationid']);
+    return next();
 }

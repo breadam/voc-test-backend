@@ -1,5 +1,4 @@
 import Resource from '../Resource.js';
-import Store from '../store.js';
 
 export default Resource({
 
@@ -10,8 +9,8 @@ export default Resource({
         data.organizationId = ctx.organizationId;
     },
 
-    afterCreate(ctx,item){
-        Store.updateOne('devices',item.deviceId,{
+    async afterCreate(ctx,item){
+        await ctx.store.updateOne('devices',item.deviceId,{
             calibrationId:item.id
         });
         

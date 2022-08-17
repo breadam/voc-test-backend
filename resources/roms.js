@@ -1,5 +1,4 @@
 import Resource from '../Resource.js';
-import Store from '../store.js';
 
 export default Resource({
 
@@ -7,21 +6,21 @@ export default Resource({
         data.organizationId = ctx.organizationId;
     },
 
-    afterFindMany(ctx,items){
-       addGlobalRoms(items);
+    async afterFindMany(ctx,items){
+        await addGlobalRoms(ctx.store,items);
     },
 
-    afterGetMany(ctx,items){
-        addGlobalRoms(items);
+    async afterGetMany(ctx,items){
+        await addGlobalRoms(ctx.store,items);
     },
 
-    afterGetAll(ctx,items){
-        addGlobalRoms(items);
+    async afterGetAll(ctx,items){
+        await addGlobalRoms(ctx.store,items);
     }
 });
 
-function addGlobalRoms(items){
-    const roms = Store.getAll('roms');
+async function addGlobalRoms(Store,items){
+    const roms = await Store.getAll('roms');
         
     roms.forEach((item) => {
         if(!('organizationId' in item)){

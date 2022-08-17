@@ -1,12 +1,12 @@
 import Resource from '../Resource.js';
-import Store from '../store.js';
 
 export default Resource({
 
-    beforeCreate(ctx,data){
+    async beforeCreate(ctx,data){
+        const Store = ctx.store;
         data.organizationId = ctx.organizationId;
 
-        const readings = Store.findMany('readings',{code:data.code});
+        const readings = await Store.findMany('readings',{code:data.code});
         const devices = readings.filter((reading) => !!reading.deviceId);
 
         if(devices.length){
@@ -14,20 +14,22 @@ export default Resource({
         }
     },
 
-    afterCreate(ctx,item){
-        const readings = Store.findMany('readings',{code:item.code});
+    async afterCreate(ctx,item){
+        const Store = ctx.store;
+        const readings = await Store.findMany('readings',{code:item.code});
         
-        readings.forEach((reading) => {
+        readings.forEach(async(reading) => {
             reading.deviceId = item.id;
             reading.organizationId = ctx.organizationId;
-            Store.saveOne('readings',reading);
+            await Store.saveOne('readings',reading);
         });
     },
 
-    beforeUpdate(ctx,data){
+    async beforeUpdate(ctx,data){
+        const Store = ctx.store;
         data.organizationId = ctx.organizationId;
 
-        const readings = Store.findMany('readings',{code:data.code});
+        const readings = await Store.findMany('readings',{code:data.code});
         const devices = readings.filter((reading) => !!reading.deviceId && reading.deviceId !== data.id);
 
         if(devices.length){
@@ -35,13 +37,14 @@ export default Resource({
         }
     },
 
-    afterUpdate(ctx,item){
-        const readings = Store.findMany('readings',{code:item.code});
+    async afterUpdate(ctx,item){
+        const Store = ctx.store;
+        const readings = await Store.findMany('readings',{code:item.code});
         
-        readings.forEach((reading) => {
+        readings.forEach(async (reading) => {
             reading.deviceId = item.id;
             reading.organizationId = ctx.organizationId;
-            Store.saveOne('readings',reading);
+            await Store.saveOne('readings',reading);
         });
     }
 });

@@ -5,10 +5,10 @@ export default Resource({
     labels:{
         unique(ctx,items){
             return items
-                .filter((item) => item.organizationId === ctx.organizationId)
+                .filter((item) => ctx.organizationId.equals(item.organizationId))
                 .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .reduce((r, o) => {
-                    const index = r.findIndex(({ deviceId }) => deviceId === o.deviceId);
+                    const index = r.findIndex(({ deviceId }) => deviceId && deviceId.equals(o.deviceId));
                     if(index === -1){
                         r.push(o);
                     }

@@ -7,6 +7,7 @@ export default Resource({
     },
 
     afterCreate(ctx,data){
+        const Store = ctx.store;
         const invitations = Store.findMany('invitations',{email:data.email});
 
         invitations.forEach(invitation => {

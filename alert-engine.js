@@ -1,45 +1,44 @@
-function compareTrigger(comparatorId,reading,value){
-    switch(comparatorId){
-        case '1':
+function compareTrigger(comparatorCode,reading,value){
+    switch(comparatorCode){
+        case 'gt':
             return reading > value; 
-        case '2':
+        case 'gte':
             return reading >= value;
-        case '3':
+        case 'lt':
             return reading < value;
-        case '4':
+        case 'lte':
             return reading <= value;
-        case '5':
+        case 'eq':
             return reading == value;
     }
 }
 
-function compareSensors(sensorId,comparatorId,reading,value){
-    switch(sensorId){
-        case '1':
-            return compareTrigger(comparatorId,reading.temperature,value);
-        case '2':
-            return compareTrigger(comparatorId,reading.humidity,value);
-        case '3':
-            return compareTrigger(comparatorId,reading.iaq,value);
+function compareSensors(sensorCode,comparatorCode,reading,value){
+    switch(sensorCode){
+        case 'temperature':
+            return compareTrigger(comparatorCode,reading.temperature,value);
+        case 'humidity':
+            return compareTrigger(comparatorCode,reading.humidity,value);
+        case 'iaq':
+            return compareTrigger(comparatorCode,reading.iaq,value);
     }
 }
 
-function checkTriggers(triggerIds,reading){
-
-    return triggerIds.filter(({sensorId,comparatorId,value}) => compareSensors(sensorId,comparatorId,reading,value));
+function checkTriggers(triggers,reading){
+    return triggers.filter(({sensor,comparator,value}) => compareSensors(sensor.code,comparator.code,reading,value));
 }
 
 function isTargetDevice(rule,device){
 
-    if(rule.deviceIds.includes(device.id)){
+    if(rule.deviceIds.find(id => id.equals(device.id))){
         return true;
     }
 
-    if(rule.placeIds.includes(device.placeId)){
+    if(rule.placeIds.find(id => id.equals(device.id))){
         return true;
     }
 
-    const commonTags = device.tagIds.filter(tagId => rule.tagIds.includes(tagId));
+    const commonTags = device.tagIds.filter(tagId => rule.tagIds.find(id => id.equals(tagId)));
 
     if(commonTags.length >= 1){
         return true;

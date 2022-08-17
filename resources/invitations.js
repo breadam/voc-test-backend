@@ -1,4 +1,3 @@
-import Store from '../store.js';
 import Resource from '../Resource.js';
 
 export default Resource({
@@ -8,7 +7,7 @@ export default Resource({
     },
 
     afterCreate(ctx,data){
-
+        const Store = ctx.store;
         const user = Store.findOne('users',{email:data.email});
 
         if(user){
@@ -26,7 +25,7 @@ export default Resource({
     afterUpdate(ctx,{state,id,organizationId,email,createdById}){
 
         if(state === 'accept'){
-            
+            const Store = ctx.store;
             const user = Store.findOne('users',{email:email});
             
             if(user){
@@ -34,7 +33,7 @@ export default Resource({
                 Store.createOne('roles',{
                     organizationId:organizationId,
                     userId:user.id,
-                    name:'viewer'
+                    name:'Viewer'
                 });
 
                 Store.createOne('notifications',{
@@ -47,7 +46,7 @@ export default Resource({
                 });
             }
         }else if(state === 'decline'){
-
+            const Store = ctx.store;
             const user = Store.findOne('users',{email:email});
 
             if(user){

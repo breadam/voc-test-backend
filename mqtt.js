@@ -1,9 +1,9 @@
 import {connect} from 'mqtt';
 import { checkTriggers, isTargetDevice } from './alert-engine.js';
 
-import Store from './store.js';
+//import Store from './store.js';
 
-export default ({url,username,password}) => {
+export default async ({url,username,password},Store) => {
 
     const client = connect(url,{
         username,
@@ -15,8 +15,9 @@ export default ({url,username,password}) => {
         client.subscribe('Status', function (err) {});
     });
 
-    client.on('message', function (topic, message) {
+    client.on('message', async function (topic, message) {
         if(topic === 'Send'){
+            
             const fields = message.toString().split('#');
             const code = fields[0];
             /*
@@ -31,10 +32,10 @@ export default ({url,username,password}) => {
             const iaqUnit = fields[9];
             */
 
-            const device = Store.findOne('devices',{code});
+            const device = await Store.findOne('devices',{code});
             const organizationId = device?.organizationId;
 
-            const reading = Store.createOne('readings',{
+            const reading = await Store.createOne('readings',{
                 deviceId:device?.id,
                 organizationId:organizationId,
                 code:code,
@@ -45,33 +46,46 @@ export default ({url,username,password}) => {
                 iaq:fields[8]
             });
 
+            const comparators = await Store.getAll('comparators');
+            const sensors = await Store.getAll('sensors');
+
             if(device){
 
-                const rules = Store.findMany('alert-rules',{organizationId});
+                const rules = await Store.findMany('alert-rules',{organizationId});
+                
+                for(const rule of rules){
 
-                rules.forEach(rule => {
                     if(!isTargetDevice(rule,device)){
                         return;
                     }
 
-                    const alerts = checkTriggers(rule.triggerIds,reading);
-                    const roles = Store.findMany('roles',{organizationId});
+                    const triggers = rule.triggerIds.map(({sensorId,comparatorId,value}) => ({
+                        sensor:sensors.find(s => sensorId.equals(s.id)),
+                        comparator:comparators.find(c => comparatorId.equals(c.id)),
+                        value
+                    }));
 
-                    alerts.forEach(item => {
+                    const alerts = checkTriggers(triggers,reading);
+                    const roles = await Store.findMany('roles',{organizationId});
 
-                        const alert = Store.createOne('alerts',{
+                    for(const item of alerts){
+                        const alert = await Store.createOne('alerts',{
                             organizationId,
                             alertRuleId:rule.id,
                             deviceId:device.id,
-                            triggerIds:item,
+                            triggerId:{
+                                sensorId:item.sensor.id,
+                                comparatorId:item.comparator.id,
+                                value:item.value,
+                            },
                             createdAt:new Date()
                         });
 
-                        roles.forEach(role => {
+                        for(const role of roles){
 
-                            if(role.name === 'admin'){
+                            if(role.name === 'Owner'){
 
-                                Store.createOne('notifications',{
+                                await Store.createOne('notifications',{
                                     type:'alert',
                                     userId:role.userId,
                                     deviceId:device.id,
@@ -80,11 +94,9 @@ export default ({url,username,password}) => {
                                     createdAt:new Date()
                                 });
                             }
-                        });
-
-                    });
-                });
-
+                        }
+                    }
+                }
             }
 
         }else if(topic === 'Status'){
@@ -94,17 +106,17 @@ export default ({url,username,password}) => {
          // const localIp = fields[1];
             const romName = fields[2];
 
-            let rom = Store.findOne('roms',{name:romName});
+            let rom = await Store.findOne('roms',{name:romName});
 
             if(!rom){
-                rom = Store.createOne('roms',{name:romName});
+                rom = await Store.createOne('roms',{name:romName});
             }
 
-            const device = Store.findOne('devices',{code});
+            const device = await Store.findOne('devices',{code});
 
             if(device){
                 device.activeRomId = rom.id;
-                Store.updateOne('devices',device.id,device);
+                await Store.updateOne('devices',device.id,device);
             }
         }
     });
